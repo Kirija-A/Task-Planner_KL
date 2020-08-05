@@ -1,0 +1,138 @@
+    buildTask(parentElement) {
+      let newTaskRow = document.createElement("tr");
+  
+      // create the checkbox column
+      let col1 = buildColumn();
+      let input = document.createElement("input");
+      input.setAttribute("type", "checkbox");
+      input.setAttribute("data-id", this.id);
+  
+      input.classList.add("checkbox");
+      col1.appendChild(input);
+  
+      //add to the row
+      newTaskRow.appendChild(col1);
+  
+      // create the task name column
+      let col2 = buildColumn();
+      col2.innerHTML = this.name;
+  
+      // add to the row
+      newTaskRow.appendChild(col2);
+  
+      // create the task assignee column
+      let col3 = buildColumn();
+  
+      col3.appendChild(buildBadge(this.assignee));
+  
+      // add to the row
+      newTaskRow.appendChild(col3);
+  
+      // create the due date column
+      let col4 = buildColumn();
+  
+      let dueDateBadge;
+  
+      let taskDate = new Date(this.duedate);
+  
+      let currentDate = new Date();
+  
+      // compare the task due date to the current date
+      if (
+        taskDate.getFullYear() == currentDate.getFullYear() &&
+        taskDate.getMonth() == currentDate.getMonth() &&
+        taskDate.getDate() == currentDate.getDate()
+      ) {
+        // task due today, set due date badge color to yellow
+  
+        dueDateBadge = buildBadge(this.duedate, "badge-warning");
+      } else if (taskDate.getTime() < currentDate.getTime()) {
+        // task overdue at least 1 day, set due date badge color to red
+        dueDateBadge = buildBadge(this.duedate, "badge-danger");
+  
+        if (this.status == "Not started") {
+          // task status is not completed or in progress, switch task status to overdue
+          this.status = "Overdue";
+        }
+      } else {
+        // task is due in the future, set due date badge color to grey
+        dueDateBadge = buildBadge(this.duedate);
+      }
+  
+      col4.appendChild(dueDateBadge);
+  
+      // add to the row
+      newTaskRow.appendChild(col4);
+  
+      // create the task status column
+      let col5 = buildColumn();
+  
+      let statusBadge;
+  
+      // set task status badge color according to status
+      switch (this.status) {
+        case "In progress":
+          statusBadge = buildBadge(this.status, "badge-warning");
+          break;
+        case "Completed":
+          statusBadge = buildBadge(this.status, "badge-success");
+          break;
+        case "Overdue":
+          statusBadge = buildBadge(this.status, "badge-danger");
+          break;
+        default:
+          statusBadge = buildBadge(this.status);
+          break;
+      }
+  
+      // add task status badge to the column
+      col5.appendChild(statusBadge);
+  
+      // add task status column to the row
+      newTaskRow.appendChild(col5);
+  
+      // create the detail / edit button column
+      let col6 = buildColumn();
+  
+      // create the drop down detail button
+      let detailBadge = buildBadge("Details");
+      detailBadge.classList.add("dropdown-toggle", "mx-1");
+  
+      // link the drop down detail button to the collapsible detail row
+      detailBadge.setAttribute("data-toggle", "collapse");
+      detailBadge.setAttribute("data-target", "#" + this.detailId);
+  
+      //add the detail button to the column
+      col6.appendChild(detailBadge);
+  
+      //add the edit button to the column
+      col6.appendChild(buildBadge("Edit", "badge-info"));
+  
+      // add the buttons column to the row
+      newTaskRow.appendChild(col6);
+  
+      //create a new task detail row
+      var newTaskDetailRow = document.createElement("tr");
+  
+      newTaskDetailRow.setAttribute("id", this.detailId);
+      newTaskDetailRow.classList.add("bg-light", "collapse");
+      newTaskDetailRow.setAttribute("data-parent", "#taskTableBody");
+  
+      // create a blank column
+      let col7 = buildColumn();
+  
+      //add to the row
+      newTaskDetailRow.appendChild(col7);
+  
+      // create the task detail column
+      let col8 = buildColumn();
+      col8.setAttribute("colspan", "5");
+      col8.innerHTML = this.details;
+  
+      // add to the row
+      newTaskDetailRow.appendChild(col8);
+  
+      parentElement.appendChild(newTaskRow);
+      parentElement.appendChild(newTaskDetailRow);
+    }
+  }
