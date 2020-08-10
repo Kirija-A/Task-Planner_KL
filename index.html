@@ -16,36 +16,20 @@
         <a class="navbar-brand" href="index.html"><i class="fa fa-tasks fa-1x" aria-hidden="true"></i> Task Planner
         </a>
     </nav> 
-    <!-- Buttons for Add Task, Delete Task and Order by -->
+    <!-- Buttons for Add Task, Delete Task-->
     <section>
-        <div
-        class="container container-fluid container-lg-1 container-md-3 container-sm-6 bg-white rounded">
-          
-        <div class="d-flex flex-wrap align-items-center justify-content-between p-3">
-          <div>
-            <button type="button" class="btn btn-outline-success m-1" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
-          </div>
-          <div>
-            <button type="button" class="btn btn-outline-danger m-1" id="deletebutton">Delete Task</button>
-          </div>
-          
-            <!-- <div class="dropdown">
-              <button class="btn btn-outline-primary dropdown-toggle m-1" id="assigneeDropDown" data-toggle="dropdown">Assignee</span>
-              <div class="dropdown-menu" aria-labelledby="assigneeDropDown">
-                <a class="dropdown-item" data-toggle="modal" data-target="#addAssigneeModal">Add Assignee</a>
-                <a class="dropdown-item" href="#">Delete Assignee</a>
+        <div class="container container-fluid container-lg-1 container-md-3 container-sm-6 bg-white rounded">
+            <div class="d-flex flex-wrap align-items-center justify-content-between p-3">
+              <div>
+                <button type="button" class="btn btn-outline-success m-1" data-toggle="modal" data-target="#addTaskModal">Add Task</button>
               </div>
-            </div> -->
-            <div class="dropdown">
-              <button class="btn btn-outline-primary dropdown-toggle m-1" id="filterDropDown" data-toggle="dropdown">Order Tasks</span>
-              <div class="dropdown-menu" aria-labelledby="filterDropDown">
-                <a class="dropdown-item" href="#">By Assignee</a>
-                <a class="dropdown-item" href="#">By Due Date</a>
-                <a class="dropdown-item" href="#">By Status</a>
-              </div>
+              <div>
+                <button type="button" class="btn btn-outline-warning m-1" id="editbutton">Edit Task</button>
+              </div>  
+              <div>
+                <button type="button" class="btn btn-outline-danger m-1" id="deletebutton">Delete Task</button>
+              </div>     
             </div>
-        
-          </div>
           <!-- Table to display the Task -->
         <div class="table-responsive table-hover">
           <table class="table">
@@ -68,7 +52,6 @@
           </table>
         </div>
       </div>
-    </div>
         <!-- Modal to display the Add Task form -->
       <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
