@@ -1,3 +1,5 @@
+let deletebutton = document.querySelector("#deletebutton");
+let editbutton=document.querySelector("#editbutton");
  // Create the task list object array
 
 class TaskManager {
@@ -29,7 +31,9 @@ class TaskManager {
         task.buildTask(taskTableBody);
       });
     }
-  
+    deleteTask(id){
+      this.tasks = this.tasks.filter((task) => task.id != id);
+    }
   }
 
   //Building the column for the table
@@ -39,13 +43,13 @@ class TaskManager {
     return col;
   }
   
-  //badge for the assignee
-  function buildBadge(text, badgeClass = "text-secondary") {
-    let badge = document.createElement("span");
-    badge.classList.add("text");
-    badge.classList.add(badgeClass);
-    badge.innerHTML = text;
-    return badge;
+  //Text for the details
+  function buildText(text, textClass = "text-secondary") {
+    let textElement = document.createElement("span");
+    textElement.classList.add("text");
+    textElement.classList.add(textClass);
+    textElement.innerHTML = text;
+    return textElement;
   }
   
   class Task {
@@ -69,70 +73,31 @@ class TaskManager {
       input.setAttribute("data-id", this.id);
   
       input.classList.add("checkbox");
-      col1.appendChild(input);
-  
+      col1.appendChild(input);  
       //add to the row
       newTaskRow.appendChild(col1);
-  
+
       // create the task name column
       let col2 = buildColumn();
-      col2.innerHTML = this.name;
-  
+      col2.innerHTML = this.name;  
       // add to the row
       newTaskRow.appendChild(col2);
   
       // create the task assignee column
       let col3 = buildColumn();
-  
-      col3.appendChild(buildBadge(this.assignee));
-  
+      col3.innerHTML=this.assignee;  
       // add to the row
       newTaskRow.appendChild(col3);
   
       // create the due date column
       let col4 = buildColumn();
-  
-      let dueDateBadge;
-  
-      let taskDate = new Date(this.duedate);
-  
-      let currentDate = new Date();
-  
-      // compare the task due date to the current date
-      if (
-        taskDate.getFullYear() == currentDate.getFullYear() &&
-        taskDate.getMonth() == currentDate.getMonth() &&
-        taskDate.getDate() == currentDate.getDate()
-      ) {
-        // task due today, set due date badge color to yellow
-  
-        dueDateBadge = buildBadge(this.duedate, "badge-warning");
-      } else if (taskDate.getTime() < currentDate.getTime()) {
-        // task overdue at least 1 day, set due date badge color to red
-        dueDateBadge = buildBadge(this.duedate, "badge-danger");
-  
-        if (this.status == "Not started") {
-          // task status is not completed or in progress, switch task status to overdue
-          this.status = "Overdue";
-        }
-      } else {
-        // task is due in the future, set due date badge color to grey
-        dueDateBadge = buildBadge(this.duedate);
-      }
-  
-      col4.appendChild(dueDateBadge);
-  
+      col4.innerHTML=this.duedate;
       // add to the row
       newTaskRow.appendChild(col4);
   
       // create the task status column
       let col5 = buildColumn();
-  
-      let statusBadge =buildBadge(this.status);;
-  
-      // add task status badge to the column
-      col5.appendChild(statusBadge);
-  
+      col5.innerHTML=this.status;
       // add task status column to the row
       newTaskRow.appendChild(col5);
   
@@ -140,15 +105,15 @@ class TaskManager {
       let col6 = buildColumn();
   
       // create the drop down detail button
-      let detailBadge = buildBadge("Details");
-      detailBadge.classList.add("dropdown-toggle", "mx-1");
+      let detailText = buildText("Details");
+      detailText.classList.add("dropdown-toggle", "mx-1");
   
       // link the drop down detail button to the collapsible detail row
-      detailBadge.setAttribute("data-toggle", "collapse");
-      detailBadge.setAttribute("data-target", "#" + this.detailId);
+      detailText.setAttribute("data-toggle", "collapse");
+      detailText.setAttribute("data-target", "#" + this.detailId);
   
       //add the detail button to the column
-      col6.appendChild(detailBadge);
+      col6.appendChild(detailText);
   
       // add the buttons column to the row
       newTaskRow.appendChild(col6);
@@ -162,7 +127,6 @@ class TaskManager {
   
       // create a blank column
       let col7 = buildColumn();
-  
       //add to the row
       newTaskDetailRow.appendChild(col7);
   
@@ -170,7 +134,6 @@ class TaskManager {
       let col8 = buildColumn();
       col8.setAttribute("colspan", "5");
       col8.innerHTML = this.details;
-  
       // add to the row
       newTaskDetailRow.appendChild(col8);
   
@@ -249,9 +212,9 @@ class TaskManager {
   
       modalTaskNameInput.value = null;
       modalTaskDetailInput.value = null;
-      modalAssigneeInput.value = "Myself";
+      modalAssigneeInput.value = "Kirija";
       modalDateInput.value = null;
-      modalStatusInput.value = "Not started";
+      modalStatusInput.value = "To Do";
   
       modalTaskNameInput.classList.toggle("is-valid");
       modalTaskDetailInput.classList.toggle("is-valid");
@@ -264,5 +227,45 @@ class TaskManager {
     }
   };
 
-let deletebutton = document.querySelector("#deletebutton");
+  deleteButtonClick = function () {
+    let checkBoxList = document.getElementsByClassName("checkbox");
+    for (let i = 0; i < checkBoxList.length; i++) {
+      if (checkBoxList[i].checked == true) {
+        let id = checkBoxList[i].getAttribute("data-id");
+        taskManager.deleteTask(id);
+      }
+    }
+    taskManager.buildTaskTable();
+  };
 deletebutton.addEventListener("click", deleteButtonClick);
+
+editButtonClick = function () {
+  let checkBoxList = document.getElementsByClassName("checkbox");
+  for (let i = 0; i < checkBoxList.length; i++) {
+    if (checkBoxList[i].checked == true) {
+      let id = checkBoxList[i].getAttribute("data-id");
+      taskManager.editTask(id);
+    }
+  }
+  taskManager.buildTaskTable();
+};
+editbutton.addEventListener("click", editButtonClick);
+
+const editButtons = document.querySelectorAll(".editButton");
+
+// editButtons.forEach((editButton) => {
+//   editButton.addEventListener("click", (e) => {
+//     let taskId = e.target.getAttribute("data-id");
+
+//     let task = this.getTask(taskId);
+
+//     this.modal.buildTaskModal(
+//       task.assignee,
+//       "Edit Task",
+//       "Update Task",
+//       task.name,
+//       task.details,
+//       task.duedate,
+//       task.status,
+//       false
+//     );
