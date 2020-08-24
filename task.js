@@ -153,7 +153,7 @@ submit.addEventListener("click",(e)=>{
     e.preventDefault();
     //update id checking if new id display it in the new row
     if(!contIdEdit.value){
-        console.log("new Employee");
+        console.log("new Task");
     let id=Math.floor(Math.random()*1000000);
     submit.setAttribute("data-dismiss","modal");
     if(name.value.length<8 || details.value.length<15 ||dueDate.value===""){
