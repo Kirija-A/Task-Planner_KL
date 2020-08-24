@@ -1,4 +1,4 @@
-//show todays date
+//show todays date on nav bar
 const dateElement = document.getElementById("date");
 const options = {weekday : "long", month:"short", day:"numeric"};
 const today = new Date();
