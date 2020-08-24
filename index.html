@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>CRUD</title>
+    <title>Task Planner</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -15,6 +15,7 @@
         <!-- Brand -->
         <a class="navbar-brand" href="index.html"><i class="fa fa-tasks fa-1x" aria-hidden="true"></i> Task Planner</a>
         <div class="collapse navbar-collapse justify-content-end ml-auto" id="nav">
+          <div id="date" class="text-white m-4"></div>
           <button type="button" class="btn bg-white text-dark m-1" data-toggle="modal" data-target="#formTask">Add Task</button>
         </div>          
     </nav> 
@@ -64,9 +65,9 @@
                       <label for="#status">Status</label>
                       <select class="form-control" id="status">
                             <option value="To Do" selected>To Do</option>
-                            <option value="In progress">In progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Overdue">Overdue</option>
+                            <option value="In progress">In Progress</option>
+                            <option value="Review">Review</option>
+                            <option value="Completed">Done</option>
                       </select>
                   </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -88,5 +89,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="task.js"></script>
 </body>
-
 </html>
