@@ -1,4 +1,4 @@
-import Task from "./taskclass.js"
+import Task from "./task-class.js"
 
 export default class Taskmanager extends Task{
     constructor(id,name,details,assignee,dueDate,status){
