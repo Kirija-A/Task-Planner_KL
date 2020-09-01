@@ -11,10 +11,24 @@
 
 <body>
       <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <!-- Brand -->
         <a class="navbar-brand" href="index.html"><i class="fa fa-tasks fa-1x" aria-hidden="true"></i> Task Planner</a>
-        <div class="collapse navbar-collapse justify-content-end ml-auto" id="nav">
+        <div class="collapse navbar-collapse justify-content-end ml-auto" id="nav">         
+          <div id="date" class="text-white m-4"></div>
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button" id="alldisplay">All Tasks</button>
+              <button class="dropdown-item" type="button" id="todo">To Do</button>
+              <button class="dropdown-item" type="button" id="progress">In progress</button>
+              <button class="dropdown-item" type="button" id="review">Review</button>
+              <button class="dropdown-item" type="button" id="overdue">Overdue</button>
+              <button class="dropdown-item" type="button" id="done">Done</button>
+            </div>
+          </div>
           <button type="button" class="btn bg-white text-dark m-1" data-toggle="modal" data-target="#formTask">Add Task</button>
         </div>          
     </nav> 
@@ -29,20 +43,18 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form class="validate">
                     <!-- Task Name -->
                     <div class="form-group">
                         <label for="#name">Task Name</label>
                         <input type="text" class="form-control" id="name"/>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Mandatory must enter 8 characters of length</div>
+                        <span id="errorMsg1"></span>
                     </div>
                     <!-- Task details -->
                     <div class="form-group">
                           <label for="#details">Task Details</label>
                           <textarea class="form-control" id="details" rows="3"></textarea>
-                          <div class="valid-feedback">Looks good!</div>
-                          <div class="invalid-feedback">Mandatory must enter 25 characters of length</div>
+                          <span id="errorMsg2"></span>
                       </div>
                     <!-- Assignee select -->
                     <div class="form-group">
@@ -56,8 +68,7 @@
                   <div class="form-group">
                         <label for="#dueDate">Due Date</label>
                         <input type="date" class="form-control" id="dueDate"/>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please select your task due date</div>
+                        <span id="errorMsg3"></span>
                   </div>
                   <!-- Status of the Task -->
                   <div class="form-group">
@@ -65,12 +76,15 @@
                       <select class="form-control" id="status">
                             <option value="To Do" selected>To Do</option>
                             <option value="In progress">In progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Overdue">Overdue</option>
+                            <option value="overdue">Overdue</option>
+                            <option value="review">Review</option>
+                            <option value="Done">Done</option>
                       </select>
-                  </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="submit" data-dismiss="modal">Save</button>
+                      <span id="errorMsg4"></span>
+                    </div>
+                  <span id="errorMsg5"></span>
+                    <button type="button" class="btn btn-secondary" id="formCancel" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submit" data-dismiss="modal" disabled>Save</button>
                     <input type="hidden" id="contIdEdit">
                 </div>
               </div>
