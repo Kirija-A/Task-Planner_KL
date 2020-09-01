@@ -181,4 +181,3 @@ overdue.addEventListener("click",(e)=>{
     e.preventDefault();
     newTask.displayFilter("overdue");
 });
-
