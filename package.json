@@ -1,27 +1,28 @@
 {
-  "name": "taskplannertes",
+  "name": "task-planner_kl",
   "version": "1.0.0",
   "description": "",
   "main": "task.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "parcel-bundler": "^1.12.4"
+  },
   "scripts": {
     "test": "jest",
     "start": "parcel index.html"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lakshmanjothi/taskplannertest.git"
+    "url": "git+https://github.com/Kirija-A/Task-Planner_KL.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lakshmanjothi/taskplannertest/issues"
+    "url": "https://github.com/Kirija-A/Task-Planner_KL/issues"
   },
-  "homepage": "https://github.com/lakshmanjothi/taskplannertest#readme",
-  "devDependencies": {
-    "@babel/core": "^7.11.4",
-    "@babel/preset-env": "^7.11.0",
-    "babel-jest": "^26.3.0",
-    "jest": "^26.4.2",
-    "parcel-bundler": "^1.12.4"
-  }
+  "homepage": "https://github.com/Kirija-A/Task-Planner_KL#readme"
 }
